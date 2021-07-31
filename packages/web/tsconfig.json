@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "rootDir": ".",
+    "target": "esnext",
     "module": "commonjs",
-    "lib": ["es2020"],
-    "declaration": false,
+    "jsx": "react-jsx",
+    "lib": ["DOM", "DOM.Iterable", "esnext", "webworker"],
     "strict": true,
     "skipLibCheck": true,
     "noImplicitAny": true,
@@ -16,10 +17,7 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "inlineSourceMap": true,
-    "inlineSources": true,
     "strictPropertyInitialization": true,
-    "typeRoots": ["./node_modules/@types"]
-  },
-  "exclude": ["cdk.out", "packages"]
+    "types": ["@cloudflare/workers-types"]
+  }
 }

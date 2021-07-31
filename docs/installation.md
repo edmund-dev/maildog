@@ -2,6 +2,8 @@
 
 Before start, please make sure you understand the [potential cost](../README.md#-pricing) and the [limitations](../README.md#-limitations).
 
+> If you need support, feel free to contact [me](mailto:maildog@edmund.dev).
+
 ## 1. Preparation
 
 ### 1.1 Decide on one AWS region
@@ -45,11 +47,18 @@ To begin, please fork the repository and clone it locally.
 ```sh
 # Fork and clone it at the same time
 gh repo fork edmundhung/maildog --clone
+# Or if you would like to create a fork in an organization
+# gh repo fork edmundhung/maildog --clone --org name-of-organization
 ```
 
 ```sh
 # From now on, all commands provided assumes the root of the project being your working directory
 cd maildog
+```
+
+```sh
+# Ensure all `gh` command works against your fork instead of the original repository
+export GH_REPO=[YOUR USER/ORGANIZATION NAME]/maildog;
 ```
 
 ```sh
@@ -64,18 +73,21 @@ git checkout -b production
 A JSON file with the name `maildog.config.json` is required at the root of the project.
 The format as follows:
 
-```
+<!-- prettier-ignore -->
+```jsonc
+// This config file support json with comment (jsonc)
+// It simply adds support to single line (//) and multi-line comments (/* ... */) on `json` document
 {
   "domains": {
-    "[YOUR DOMAIN HERE]": {
-      "fromEmail": <string>,             // optional, default: "noreply"
-      "scanEnabled": <boolean>,          // optional, default: true,
-      "tlsEnforced": <boolean>,          // optional, default: false,
-      "fallbackEmails": <string[]>,      // optional, default: []
-      "alias": {                         // required if fallbackEmails are not set
-        "<string>": {
-          "description": <string>,       // optional, default: ""
-          "to": <string[]>               // required
+    "exmaple.com": {                    // your domain here
+      "fromEmail": "foo",               // optional, default: "noreply"
+      "scanEnabled": false,             // optional, default: true,
+      "tlsEnforced": false,             // optional, default: false,
+      "fallbackEmails": [],             // optional, default: []
+      "alias": {                        // required if `fallbackEmails` are not set
+        "bar": {                        // result in `bar@exmaple.com`
+          "description": "Lorem ipsum", // optional, default: ""
+          "to": ["baz@exmaple.com"]     // required
         }
       }
     }
